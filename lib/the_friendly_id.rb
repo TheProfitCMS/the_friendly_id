@@ -29,8 +29,8 @@ module TheFriendlyId
     included do
       def to_param; self.slug end
 
-      validates_presence_of   :short_id, :friendly_id
-      validates_uniqueness_of :short_id, :slug
+      validates_presence_of   :short_id, :friendly_id, if: ->{ errors.blank? }
+      validates_uniqueness_of :short_id, :slug,        if: ->{ errors.blank? }
 
       before_validation :build_short_id
       before_validation :build_slugs
